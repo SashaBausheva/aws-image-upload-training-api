@@ -8,10 +8,12 @@ const removeBlanks = require('../../lib/remove_blank_fields')
 // const requireToken = passport.authenticate('bearer', { session: false })
 // instantiate a router (mini app that only handles routes)
 const router = express.Router()
+const { s3Upload, createParams, promiseReadFile } = require('../../lib/promiseS3Upload.js')
 
 // CREATE
 // POST /uploads
 router.post('/uploads', (req, res, next) => {
+  console.log(req.body)
   Upload.create(req.body.upload)
     .then(upload => {
       res.status(201).json({ upload: upload.toObject() })

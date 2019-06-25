@@ -32,6 +32,14 @@ const app = express()
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:7165' }))
 
+// creating middleware logging the request object, to see what it will look like
+app.use((req, res, next) => {
+  console.log('====================')
+  console.log(req)
+  console.log('====================')
+  next()
+})
+
 // define port for API to run on
 const port = process.env.PORT || 4741
 
